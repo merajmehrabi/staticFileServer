@@ -1,0 +1,15 @@
+version: "2"
+services:
+  node:
+    image: "node:12-alpine"
+    user: "root"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+      - HTTP_PORT=${HTTP_PORT}
+    volumes:
+      - ./app/:/home/node/app:rw
+    ports:
+      - ${HTTP_PORT}:${HTTP_PORT}
+    #command: "tail -f /dev/null"
+    command: sh -c "npm install && npm start"
